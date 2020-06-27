@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>shell on ~/christopher.loessl</title>
+    <link>https://loessl.org/tags/shell/</link>
+    <description>~/christopher.loessl (shell)</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 17 Jun 2020 22:16:31 +0200</lastBuildDate>
+    
+    <atom:link href="https://loessl.org/tags/shell/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>TIL: Mac inline sed</title>
+      <link>https://loessl.org/posts/mac-inline-sed/</link>
+      <pubDate>Wed, 17 Jun 2020 22:16:31 +0200</pubDate>
+      
+      <guid>https://loessl.org/posts/mac-inline-sed/</guid>
+      <description>&lt;p&gt;How to use inline sed on mac.&lt;/p&gt;
+&lt;p&gt;I always thought I have to use the gnu tools for inline sed, but I was wrong. Mac sed supports inline editing like this:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sed -i &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;/pattern/d&amp;#39;&lt;/span&gt; ./infile
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;For example to change all my blog posts with the tag &lt;code&gt;tip&lt;/code&gt; to &lt;code&gt;til&lt;/code&gt; I used&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sed -i &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;s/\(tags:.*\)tip\(.*\)/\1til\2/g&amp;#39;&lt;/span&gt; *.md
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

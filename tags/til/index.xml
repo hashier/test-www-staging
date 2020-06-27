@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>til on ~/christopher.loessl</title>
+    <link>https://loessl.org/tags/til/</link>
+    <description>~/christopher.loessl (til)</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 17 Jun 2020 22:16:31 +0200</lastBuildDate>
+    
+    <atom:link href="https://loessl.org/tags/til/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>TIL: Mac inline sed</title>
+      <link>https://loessl.org/posts/mac-inline-sed/</link>
+      <pubDate>Wed, 17 Jun 2020 22:16:31 +0200</pubDate>
+      
+      <guid>https://loessl.org/posts/mac-inline-sed/</guid>
+      <description>&lt;p&gt;How to use inline sed on mac.&lt;/p&gt;
+&lt;p&gt;I always thought I have to use the gnu tools for inline sed, but I was wrong. Mac sed supports inline editing like this:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sed -i &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;/pattern/d&amp;#39;&lt;/span&gt; ./infile
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;For example to change all my blog posts with the tag &lt;code&gt;tip&lt;/code&gt; to &lt;code&gt;til&lt;/code&gt; I used&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sed -i &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;s/\(tags:.*\)tip\(.*\)/\1til\2/g&amp;#39;&lt;/span&gt; *.md
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Automatically Increment Build Number (CFBundleVersion)</title>
+      <link>https://loessl.org/posts/automatically-increment-build-number-cfbundleversion/</link>
+      <pubDate>Wed, 21 Aug 2013 19:19:00 +0000</pubDate>
+      
+      <guid>https://loessl.org/posts/automatically-increment-build-number-cfbundleversion/</guid>
+      <description>&lt;p&gt;David wrote this nice little helper that automatically increments the build version every time.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#!/bin/bash
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;buildNumber&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;$(&lt;/span&gt;/usr/libexec/PlistBuddy -c &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Print CFBundleVersion&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;$INFOPLIST_FILE&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;)&lt;/span&gt;
+buildNumber&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;$(&lt;/span&gt;echo $buildNumber | sed &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;s/0*//&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;)&lt;/span&gt;
+buildNumber&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;$((&lt;/span&gt;$buildNumber &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;))&lt;/span&gt;
+buildNumber&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;$(&lt;/span&gt;printf &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;%04d&amp;#34;&lt;/span&gt; $buildNumber&lt;span style=&#34;color:#66d9ef&#34;&gt;)&lt;/span&gt;
+/usr/libexec/PlistBuddy -c &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Set :CFBundleVersion &lt;/span&gt;$buildNumber&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;$INFOPLIST_FILE&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;In Xcode just head over to &amp;ldquo;Build Phases&amp;rdquo; of your target and &amp;ldquo;Editor&amp;rdquo; -&amp;gt; &amp;ldquo;Add Build Phase&amp;rdquo; -&amp;gt; &amp;ldquo;Add Run Script Build Phase&amp;rdquo; there you can just simply paste this little script and every time you build your app the build version gets incremented.&lt;/p&gt;
+&lt;p&gt;So at least I can see how many times I build a certain project.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Improving the security of your SSH private key files — Martin Kleppmann’s blog</title>
+      <link>https://loessl.org/posts/improving-the-security-of-your-ssh-private-key-files-martin-kleppmanns-blog/</link>
+      <pubDate>Wed, 03 Jul 2013 17:50:00 +0000</pubDate>
+      
+      <guid>https://loessl.org/posts/improving-the-security-of-your-ssh-private-key-files-martin-kleppmanns-blog/</guid>
+      <description>&lt;p&gt;Read this great article:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://martin.kleppmann.com/2013/05/24/improving-security-of-ssh-private-keys.html&#34;&gt;Improving the security of your SSH private key files — Martin Kleppmann’s blog.&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;For my own convenience I just put all the important commands together but won&amp;rsquo;t explain anything. Again: Go and read the article.&lt;/p&gt;
+&lt;p&gt;Reading &amp;ldquo;normal&amp;rdquo; ASN.1 key (RSA and DSA without passphrase):&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;openssl asn1parse -in test_rsa_key
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Reading passphrase protected RSA key:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;openssl rsa -text -in test_rsa_key
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Update key from MD5 hashing to PKCS:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;mv key key.old
+openssl pkcs8 -topk8 -v2 des3 -in key.old -out key
+chmod &lt;span style=&#34;color:#ae81ff&#34;&gt;600&lt;/span&gt; key &lt;span style=&#34;color:#75715e&#34;&gt;# IMPORTANT !&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The key is now back to ASN.1 structure so you can read it with:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;openssl asn1parse -in test_rsa_key
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Test the new key. If it works just remove the old one. If it doesn&amp;rsquo;t you still have you old key.&lt;/p&gt;
+&lt;p&gt;Done.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Hot Corners</title>
+      <link>https://loessl.org/posts/hot-corners/</link>
+      <pubDate>Wed, 26 Jun 2013 16:07:00 +0000</pubDate>
+      
+      <guid>https://loessl.org/posts/hot-corners/</guid>
+      <description>&lt;p&gt;Did you know, that you can trigger your HotCorners with a modifier key?&lt;/p&gt;
+&lt;p&gt;Source:
+&lt;a href=&#34;http://hints.macworld.com/article.php?story=20130621130534978&#34;&gt;http://hints.macworld.com/article.php?story=20130621130534978&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Recursive git grep</title>
+      <link>https://loessl.org/posts/git-r-grep/</link>
+      <pubDate>Fri, 21 Jun 2013 02:15:00 +0000</pubDate>
+      
+      <guid>https://loessl.org/posts/git-r-grep/</guid>
+      <description>&lt;p&gt;I just figured out, that I want to make sure, that I never committed a key to my repository before publishing it, so what&amp;rsquo;s the easiest way to grep throw all commits in a git repository:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;git grep USERNAME &lt;span style=&#34;color:#66d9ef&#34;&gt;$(&lt;/span&gt;git rev-list --all&lt;span style=&#34;color:#66d9ef&#34;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;If you are only interested in the commits you can run:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;git log -G USERNAME
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Mission Control</title>
+      <link>https://loessl.org/posts/mission-control/</link>
+      <pubDate>Mon, 20 May 2013 18:29:00 +0000</pubDate>
+      
+      <guid>https://loessl.org/posts/mission-control/</guid>
+      <description>&lt;p&gt;To get mission control to pop up fast just write this to your plist file:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;defaults write com.apple.dock expose-animation-duration -float 0.1; killall Dock
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;And with&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;defaults delete com.apple.dock expose-animation-duration; killall Dock
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;you can get back to default setting.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Who opens my UPnP ports?</title>
+      <link>https://loessl.org/posts/who-opens-my-upnp-ports/</link>
+      <pubDate>Tue, 07 May 2013 16:11:00 +0000</pubDate>
+      
+      <guid>https://loessl.org/posts/who-opens-my-upnp-ports/</guid>
+      <description>&lt;p&gt;Recently I turned on UPnP (Universal Plug and Play) to play a bit with it and instantly noticed that someone/something opened some ports in my router and forwarded them to my machine. So of course I wanted to know what&amp;rsquo;s going on on my network. First idea &amp;ldquo;wireshark&amp;rdquo; but this only gives you information from which port these UPnP stuff goes, it doesn&amp;rsquo;t tell you the application that initiated these packages. For the curious here is the &lt;a href=&#34;http://wiki.wireshark.org/SSDP&#34;&gt;filter&lt;/a&gt; you can use:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;udp.dstport &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1900&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; http &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; ip.addr &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; 192.168.1.100
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;UPnP uses the &lt;a href=&#34;http://en.wikipedia.org/wiki/Simple_Service_Discovery_Protocol&#34;&gt;SSDP&lt;/a&gt; protocol which isn&amp;rsquo;t implemented by wireshark but you can simply use the http protocol because SSDP is based on &lt;a href=&#34;http://en.wikipedia.org/wiki/HTTPU&#34;&gt;HTTPU&lt;/a&gt; (yes, HTTPU).&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Imagine a picture that shows you that port 4500 and 5353 are open&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;So port 4500 and 5353 (both UDP) are forwarded to my Mac but which software is behind this? Strangely&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;lsof -i :4500
+lsof -i :5353
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Booth show nothing&amp;hellip; which means right now nothing is listening on those ports on my machine.&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;Let&amp;rsquo;s see which &amp;ldquo;normal&amp;rdquo; services listen on those ports. Of course this is not 100 % certain since any program could listen on those ports.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ grep &lt;span style=&#34;color:#ae81ff&#34;&gt;4500&lt;/span&gt; /etc/services
+ipsec-msft      4500/udp    &lt;span style=&#34;color:#75715e&#34;&gt;# Microsoft IPsec NAT-T&lt;/span&gt;
+ipsec-msft      4500/tcp    &lt;span style=&#34;color:#75715e&#34;&gt;# Microsoft IPsec NAT-T&lt;/span&gt;
+
+$ grep &lt;span style=&#34;color:#ae81ff&#34;&gt;5353&lt;/span&gt; /etc/services
+&lt;span style=&#34;color:#75715e&#34;&gt;#               5353        Unassigned&lt;/span&gt;
+mdns            5353/udp    &lt;span style=&#34;color:#75715e&#34;&gt;# Multicast DNS&lt;/span&gt;
+mdns            5353/tcp    &lt;span style=&#34;color:#75715e&#34;&gt;# Multicast DNS&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;I didn&amp;rsquo;t do anything with VPN or IPsec so I started googling and found this &lt;a href=&#34;http://support.apple.com/kb/TS1629&#34;&gt;Apple KB entry&lt;/a&gt; which explained to me which services forward those ports and apparently it&amp;rsquo;s just &amp;ldquo;Back to My Mac&amp;rdquo; and some &amp;ldquo;Bonjour&amp;rdquo; stuff.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Script to automatically login to UpUnet-S at Uppsala University</title>
+      <link>https://loessl.org/posts/script-to-automatically-login-to-upunet-s-at-uppsala-university/</link>
+      <pubDate>Tue, 26 Mar 2013 10:28:00 +0000</pubDate>
+      
+      <guid>https://loessl.org/posts/script-to-automatically-login-to-upunet-s-at-uppsala-university/</guid>
+      <description>&lt;p&gt;If you want a small bash, zsh or shell script that auto authenticates you with Uppsala Universities UpUnet-S you can use this simple one liner, just add our username and password and up you go&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;curl --data &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;action=Login&amp;#34;&lt;/span&gt; --data &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;usergroup=UpUnet-S&amp;#34;&lt;/span&gt; --data-urlencode &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;username=YOUR_USERNAME&amp;#34;&lt;/span&gt; --data-urlencode &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;password=YOUR_PASSWORD&amp;#34;&lt;/span&gt; https://netlogon.student.uu.se
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;If you are a student at SLU you can try to substitute &lt;code&gt;usergroup=UpUnet-S&lt;/code&gt; with &lt;code&gt;usergroup=SLU&lt;/code&gt; and it should work for you as well. It&amp;rsquo;s untested though.&lt;/p&gt;
+&lt;p&gt;There is even an iPhone app that I wrote for it: &lt;a href=&#34;https://github.com/hashier/UpUnet-S&#34;&gt;https://github.com/hashier/UpUnet-S&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Safari search</title>
+      <link>https://loessl.org/posts/safari-search/</link>
+      <pubDate>Fri, 08 Feb 2013 14:42:00 +0000</pubDate>
+      
+      <guid>https://loessl.org/posts/safari-search/</guid>
+      <description>&lt;p&gt;To be able to use Safari&amp;rsquo;s search function you definitely should execute this cmd:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;defaults write com.apple.Safari FindOnPageMatchesWordStartsOnly -bool FALSE
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;As the name states it. Your search string doesn&amp;rsquo;t need to be at the beginning of the word.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>How to run FreeMind on Mountain Lion</title>
+      <link>https://loessl.org/posts/how-to-run-freemind-on-ml/</link>
+      <pubDate>Thu, 07 Feb 2013 20:05:00 +0000</pubDate>
+      
+      <guid>https://loessl.org/posts/how-to-run-freemind-on-ml/</guid>
+      <description>&lt;p&gt;If you try to run FreeMind on Mountain Lion you get this &amp;ldquo;nice&amp;rdquo; error message:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;FreeMind.app&amp;rdquo; is damaged and can&amp;rsquo;t be opened. You should move it to the Trash.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;To persuade FreeMind to run anyway you can type this command into your console:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;java -jar /Applications/FreeMind.app/Contents/Resources/Java/lib/freemind.jar
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;I read on the internet that you can disable GateKeeper as well to run FreeMind but I didn&amp;rsquo;t try it.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>iTunes: sort albums by year instead of name</title>
+      <link>https://loessl.org/posts/itunes-sort-albums-by-year/</link>
+      <pubDate>Wed, 06 Feb 2013 18:27:28 +0000</pubDate>
+      
+      <guid>https://loessl.org/posts/itunes-sort-albums-by-year/</guid>
+      <description>&lt;p&gt;By default iTunes sorts albums by name instead of year for whatever reason.&lt;/p&gt;
+&lt;p&gt;Anyway with&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;⌘j&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;you can set the sorting to year.&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
